@@ -8,7 +8,6 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -32,7 +31,7 @@ public class UserResource {
         return this.userLoginRepository.findAll();
     }
 
-    @PostMapping()
+    @PostMapping("/create")
     public ResponseEntity<User> createUser(@Valid @RequestBody User user, HttpServletResponse response) {
         User userCreate = this.userLoginRepository.save(user);
 

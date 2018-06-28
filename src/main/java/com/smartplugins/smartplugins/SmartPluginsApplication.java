@@ -9,4 +9,5 @@ public class SmartPluginsApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SmartPluginsApplication.class, args);
 	}
+	
 }

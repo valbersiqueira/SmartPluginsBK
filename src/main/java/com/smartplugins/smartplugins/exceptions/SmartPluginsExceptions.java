@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -56,11 +57,11 @@ public class SmartPluginsExceptions extends ResponseEntityExceptionHandler {
 
     private List<Erro> createListErros(BindingResult bindingResult) {
         List<Erro> erros = new ArrayList<>();
-        bindingResult.getFieldErrors().forEach(er -> {
-            String messageUser = messageSource.getMessage(er, LocaleContextHolder.getLocale());
-            String messageDes = er.toString();
-            erros.add(new Erro(messageUser, messageDes));
-        });
+        for(FieldError er : bindingResult.getFieldErrors()){
+        	  String messageUser = messageSource.getMessage(er, LocaleContextHolder.getLocale());
+              String messageDes = er.toString();
+              erros.add(new Erro(messageUser, messageDes));
+        }
         return erros;
     }
 
